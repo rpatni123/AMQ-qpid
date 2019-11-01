@@ -1,0 +1,69 @@
+broker.xml configuration 
+
+Use Case 1. Create the Anycast address
+
+<address name="FDXT.T1">
+   <anycast>
+	 <queue name="FDXT.T1" />
+   </anycast>
+</address>
+        
+    
+Use Case 2. Create Multicast Address
+
+<address name="FDEX.B2B.EXAMPLE">
+   <multicast>
+    	<queue name="FDEX.B2B.CONSUMER.1"/>
+        <queue name="FDEX.B2B.CONSUMER.2"/>
+        <queue name="FDEX.B2B.CONSUMER.3"/>
+        <queue name="FDEX.B2B.CONSUMER.4"/>
+	</multicast>
+</address>    
+        
+   
+Use Case 3. Using WildCard
+
+add this to your broker.xml file, it will tell broker to enable wildCard
+
+<wildcard-addresses>
+  <enabled>true</enabled>
+  <delimiter>.</delimiter>
+  <any-words>#</any-words>
+  <single-word>*</single-word>
+</wildcard-addresses>
+
+<address name="FEDEX.SOURCE.*">
+   <multicast>
+     <queue name="FEDEX.SOURCE.STAR"/>
+   </multicast>
+</address>
+<address name="FEDEX.SOURCE.REQ.CONSUMER1">
+   <multicast>
+     <queue name="FEDEX.SOURCE.REQ.CONSUMER.1"/>
+   </multicast>
+</address>
+<address name="FEDEX.SOURCE.REQ.CONSUMER2">
+  <multicast>
+    <queue name="FEDEX.SOURCE.REQ.CONSUMER.2"/>
+   </multicast>
+</address>
+<address name="FEDEX.SOURCE.#">
+   <multicast>
+    <queue name="FEDEX.SOURCE.HASH"/>
+   </multicast>
+</address>
+<address name="FEDEX.SOURCE.CONSUMER3">
+   <multicast>
+    <queue name="FEDEX.SOURCE.CONSUMER.3"/>
+  </multicast>
+</address>
+        
+        
+Use Case 4. Filter Testing
+<address name="FILTER.TEST">
+	<anycast>
+		<queue name="FILTER.TEST">
+			<filter string="NEWS='bbc'"/>
+        </queue>
+	</anycast>
+</address>
